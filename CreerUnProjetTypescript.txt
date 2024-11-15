@@ -66,7 +66,7 @@ module.exports = {
 /dist
 /node_modules
 
-- Créer et/ou ouvrir index.html dans le dossier dist et ajouter:
+- Créer et/ou ouvrir index.html dans le dossier src et ajouter:
 
 <html>
 	<head>
@@ -80,10 +80,17 @@ module.exports = {
 	</body>
 </html>
 
-- Créer et/ou ouvrir main.css dans le dossier dist et ajouter:
+- Créer un lien physique du fichier index.html vers le dossier dist
+
+mklink /H ..\dist\index.html ..\src\index.html
+
+- Créer et/ou ouvrir main.css dans le dossier src et ajouter:
 
 /* Fichier CSS vide */
 
+- Créer un lien physique du fichier main.css vers le dossier dist
+
+mklink /H ..\dist\main.css ..\src\main.css
 
 - Remplacer dans package.json la partie main et script par:
 
