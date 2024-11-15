@@ -1,0 +1,128 @@
+- Créer le dossier du projet et aller dessus
+
+- Executer la ligne ci-dessous
+
+npm init -y
+
+- Créer les dossier dist et src
+
+mkdir dist
+mkdir src
+
+- Installer les paquets suivants:
+
+npm install --save-dev webpack@latest webpack-dev-server@latest
+npm install --save-dev typescript ts-loader
+npm install -D webpack-cli
+
+- Créer et/ou ouvrir le fichier webpack.config.js et ajouter:
+
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.ts',
+  devtool: 'inline-source-map',
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+
+- Créer et/ou ouvrir le fichier tsconfig.json et ajouter:
+
+{
+  "compilerOptions": 
+  {
+    "module": "commonjs",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "target": "ES2022",
+    "allowJs": true,
+    "noImplicitAny": false,
+  },
+  "include": ["src"]
+}
+
+- Créer et/ou ouvrir .gitignore et ajouter:
+
+/dist
+/node_modules
+
+- Créer et/ou ouvrir index.html dans le dossier dist et ajouter:
+
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <title>Mon projet TS</title>
+	    <meta name="viewport" content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <link href="main.css" rel="stylesheet">
+	</head>
+	<body>
+	    <script src="bundle.js"></script>
+	</body>
+</html>
+
+- Créer et/ou ouvrir main.css dans le dossier dist et ajouter:
+
+/* Fichier CSS vide */
+
+
+- Remplacer dans package.json la partie main et script par:
+
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run bundle && npm-run-all --parallel watch serve",
+    "bundle": "webpack",
+    "watch": "webpack --watch",
+    "serve": "cd dist && live-server"
+  },
+
+- Créer et/ou copier dans le fichier index.ts dans le dossier src
+
+
+class Test
+{
+    protected message: string ;
+
+    constructor( msg: string )
+    {
+        this.message = msg ;
+    }
+
+    public afficheMessage(): void
+    {
+        console.log( "Le message est: " + this.message ) ;
+    }
+}
+
+let message = new Test( "Coucou" ) ;
+message.afficheMessage() ;
+  
+- Pour compiler taper la commande "npm run bundle"
+
+- Pour afficher dans Chrome taper l'URL "localhost/nom de votre projet/dist"
+
+
+
+
+
