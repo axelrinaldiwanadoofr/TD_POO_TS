@@ -13,10 +13,7 @@ let figureCourante: Figure = null ;
 // Compteur de click
 let compteurDeClick = 0 ;
 
-let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
-
-let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
-choixFigure.addEventListener( "change", ()=>
+function creeFigure()
 {
     if( choixFigure.value == "0" )
     {
@@ -24,11 +21,21 @@ choixFigure.addEventListener( "change", ()=>
         dessin.ajoute( figureCourante ) ;
         dessin.dessiner( ctx ) ;
     }
-}) ;
+} 
+
+let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
+
+let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
+
 
 let canvas = document.querySelector( "canvas") ;
 canvas.addEventListener( "click", (event)=>
 {
+    if( !figureCourante )
+    {
+        creeFigure() ;
+    }
+
     if( figureCourante )
     {
         compteurDeClick++ ;
@@ -39,10 +46,10 @@ canvas.addEventListener( "click", (event)=>
         {
             figureCourante = null ;
             compteurDeClick = 0 ;
-            choixFigure.value = "-1" ;
         }
-        dessin.dessiner( ctx ) ;
     }
+
+    dessin.dessiner( ctx ) ;
 });
 
 let ctx = canvas.getContext( "2d" ) ;
