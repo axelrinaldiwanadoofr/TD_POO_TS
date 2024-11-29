@@ -23,4 +23,13 @@ export class FgPoint extends Figure
         ctx.fill() ;
     }
 
+    public setByClick(souri: Point, numClick: number): boolean 
+    {
+        if( numClick == 1 )
+        {
+            this.point = souri ;
+        }    
+        return true ;
+    }
+
 }

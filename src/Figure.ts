@@ -1,3 +1,4 @@
+import {Point} from "./Point" ;
 
 export class Figure
 {
@@ -8,5 +9,10 @@ export class Figure
 
     public dessiner( ctx: CanvasRenderingContext2D ): void
     {
+    }
+
+    public setByClick( souri: Point, numClick: number ): boolean
+    {
+        return true ;
     }
 }

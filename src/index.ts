@@ -8,18 +8,48 @@ let message: Test ;
 message = new Test( "coucou") ;
 message.afficheMessage() ;
 
+// Figure courante
+let figureCourante: Figure = null ;
+// Compteur de click
+let compteurDeClick = 0 ;
+
+let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
+
+let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
+choixFigure.addEventListener( "change", ()=>
+{
+    if( choixFigure.value == "0" )
+    {
+        figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
+        dessin.ajoute( figureCourante ) ;
+        dessin.dessiner( ctx ) ;
+    }
+}) ;
+
 let canvas = document.querySelector( "canvas") ;
+canvas.addEventListener( "click", (event)=>
+{
+    if( figureCourante )
+    {
+        compteurDeClick++ ;
+        // On crée un point à partir des coordonnées de la souri
+        let souri: Point = new Point( event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop ) ;
+
+        if( figureCourante.setByClick( souri, compteurDeClick) )
+        {
+            figureCourante = null ;
+            compteurDeClick = 0 ;
+            choixFigure.value = "-1" ;
+        }
+        dessin.dessiner( ctx ) ;
+    }
+});
+
 let ctx = canvas.getContext( "2d" ) ;
 
 // On créer un dessin vide
 let dessin = new Dessin() ;
 
-// On crée et ajoute une figure de point dans le dessin
-let point = new FgPoint( new Point( 50,100), "#FF0000" ) ;
-dessin.ajoute( point ) ;
-
-// On crée et ajoute une figure de point dans le dessin
-dessin.ajoute( new FgPoint( new Point( 100, 120), "#00FF00") ) ;
 
 // On le dessin
 dessin.dessiner( ctx ) ;
