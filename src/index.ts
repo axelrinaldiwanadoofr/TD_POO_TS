@@ -49,6 +49,7 @@ canvas.addEventListener( "click", (event)=>
         }
     }
 
+    ctx.clearRect( 0, 0, 800, 600 )
     dessin.dessiner( ctx ) ;
 });
 
