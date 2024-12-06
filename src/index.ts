@@ -63,6 +63,14 @@ let dessin = new Dessin() ;
 // On le dessin
 dessin.dessiner( ctx ) ;
 
+document.querySelector( "#btnSave" ).addEventListener( "click", async (event)=>
+{
+    await dessin.save() ;
+    alert( "Dessin enregistré" ) ;
+})
+
+// Test divers
+/*
 async function execSQL()
 {
     let data = await SQL.exec( "select * from dessins" ) ;
@@ -71,8 +79,11 @@ async function execSQL()
 }
 
 execSQL() ;
+*/
 
+/*
 dessin.deleteOldData() ;
+*/
 
 
 

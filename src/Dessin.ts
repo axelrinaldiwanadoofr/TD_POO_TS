@@ -45,4 +45,25 @@ export class Dessin
             await SQL.exec( "delete from dessins where id=" + dataId[0]["id"] ) ;
         }
     }
+
+    public async save(): Promise<void>
+    {
+        await this.deleteOldData() ;
+
+        let sql = "insert into dessins( nom ) values( '" + this._nom + "')" ;
+
+        await SQL.exec( sql ) ;
+        let dataId = await SQL.exec( "select id from dessins where nom='" + this._nom + "'" ) ;
+
+        if( dataId.length > 0 )
+        {
+            for( let i=0; i<this.figures.length; i++ )
+            {
+                await this.figures[i].save( dataId[0]["id"] ) ;
+            }    
+        }
+
+
+    }
+
 }

@@ -15,4 +15,8 @@ export class Figure
     {
         return true ;
     }
+
+    public async save( idDessin: number ): Promise<void>
+    {        
+    }
 }
