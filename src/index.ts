@@ -58,6 +58,13 @@ let ctx = canvas.getContext( "2d" ) ;
 
 // On créer un dessin vide
 let dessin = new Dessin() ;
+(document.querySelector( "#nom") as HTMLInputElement).value = dessin.nom ;
+
+document.querySelector( "#btnOK" ).addEventListener( "click", async (event)=>
+{
+    dessin.nom = (document.querySelector( "#nom") as HTMLInputElement).value ;
+    alert( "Nom du dessin mis à jour" ) ;
+}) ;
 
 
 // On le dessin
@@ -67,7 +74,7 @@ document.querySelector( "#btnSave" ).addEventListener( "click", async (event)=>
 {
     await dessin.save() ;
     alert( "Dessin enregistré" ) ;
-})
+}) ;
 
 // Test divers
 /*
