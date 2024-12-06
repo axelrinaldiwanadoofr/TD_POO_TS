@@ -45,4 +45,15 @@ export class FgPoint extends Figure
 
         await SQL.exec( sql ) ;
     }
+
+    public setFromData( data: Array<any> ): void
+    {        
+        let r = data["V1"].toString( 16 ) ;
+        let g = data["V2"].toString( 16 ) ;
+        let b = data["V3"].toString( 16 ) ;
+        this.couleur = "#" + r + g + b ;
+        this.point.x = data["V4"] ;
+        this.point.y = data["V5"] ;
+    }
+
 }

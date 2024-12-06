@@ -1,4 +1,5 @@
 
+import { FgPoint } from "./FgPoint";
 import {Figure} from "./Figure" ;
 import {SQL} from "./SQL" ;
 
@@ -62,8 +63,28 @@ export class Dessin
                 await this.figures[i].save( dataId[0]["id"] ) ;
             }    
         }
-
-
     }
 
+    public async load( nom: string ): Promise<void>
+    {
+        let dataDessin = await SQL.exec( "select id, nom from dessins where nom='" + nom + "'" ) ;
+
+        if( dataDessin.length > 0 )
+        {
+            this.nom = dataDessin[0]["nom"] ;
+
+            let dataFigures = await SQL.exec( "select * from figures where idDessin=" + dataDessin[0]["id"] ) ;
+            for( let i=0; i<dataFigures.length; i++ )
+            {
+                let figure = null ;
+                if( dataFigures[i]["type"] == "FgPoint" ) figure = new FgPoint() ;
+
+                if( figure )
+                {
+                    figure.setFromData( dataFigures[i] ) ;
+                    this.ajoute( figure ) ;
+                }
+            }    
+        }
+    }
 }

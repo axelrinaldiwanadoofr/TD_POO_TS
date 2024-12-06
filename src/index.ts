@@ -76,6 +76,18 @@ document.querySelector( "#btnSave" ).addEventListener( "click", async (event)=>
     alert( "Dessin enregistré" ) ;
 }) ;
 
+document.querySelector( "#btnLoad" ).addEventListener( "click", async (event)=>
+{
+    let nom = (document.querySelector( "#nom") as HTMLInputElement).value ;    
+
+    if( nom != "" )
+    {
+        dessin = new Dessin() ;
+        await dessin.load( nom ) ;
+        dessin.dessiner( ctx ) ;
+    }
+}) ;
+
 // Test divers
 /*
 async function execSQL()

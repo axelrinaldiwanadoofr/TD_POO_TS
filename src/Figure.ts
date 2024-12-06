@@ -19,4 +19,9 @@ export class Figure
     public async save( idDessin: number ): Promise<void>
     {        
     }
+
+    public setFromData( data: Array<any> ): void
+    {        
+    }
+
 }
