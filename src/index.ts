@@ -3,6 +3,7 @@ import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
+import {SQL} from "./SQL" ;
 
 let message: Test ;
 message = new Test( "coucou") ;
@@ -62,7 +63,14 @@ let dessin = new Dessin() ;
 // On le dessin
 dessin.dessiner( ctx ) ;
 
+async function execSQL()
+{
+    let data = await SQL.exec( "select * from dessins" ) ;
 
+    console.log( data ) ;
+}
+
+execSQL() ;
 
 
 
