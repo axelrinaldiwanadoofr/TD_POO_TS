@@ -3,6 +3,7 @@ import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
+import { FgSegment } from "./FgSegment";
 import {SQL} from "./SQL" ;
 
 let message: Test ;
@@ -16,9 +17,11 @@ let compteurDeClick = 0 ;
 
 function creeFigure()
 {
-    if( choixFigure.value == "0" )
+    if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
+    if( choixFigure.value == "1" ) figureCourante = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
+
+    if( figureCourante )
     {
-        figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
         dessin.ajoute( figureCourante ) ;
         dessin.dessiner( ctx ) ;
     }
