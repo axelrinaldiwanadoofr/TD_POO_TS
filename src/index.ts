@@ -72,6 +72,8 @@ async function execSQL()
 
 execSQL() ;
 
+dessin.deleteOldData() ;
+
 
 
 /*
