@@ -3,6 +3,7 @@ import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
+import { FgRectangle } from "./FgRectangle";
 import { FgSegment } from "./FgSegment";
 import {SQL} from "./SQL" ;
 
@@ -19,6 +20,7 @@ function creeFigure()
 {
     if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
     if( choixFigure.value == "1" ) figureCourante = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
+    if( choixFigure.value == "2" ) figureCourante = new FgRectangle( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
 
     if( figureCourante )
     {

@@ -1,6 +1,7 @@
 
 import {FgPoint } from "./FgPoint";
 import { FgSegment } from "./FgSegment";
+import { FgRectangle } from "./FgRectangle";
 import {Figure} from "./Figure" ;
 import {SQL} from "./SQL" ;
 
@@ -80,6 +81,7 @@ export class Dessin
                 let figure = null ;
                 if( dataFigures[i]["type"] == "FgPoint" ) figure = new FgPoint() ;
                 if( dataFigures[i]["type"] == "FgSegment" ) figure = new FgSegment() ;
+                if( dataFigures[i]["type"] == "FgRectangle" ) figure = new FgRectangle() ;
 
                 if( figure )
                 {
