@@ -59,8 +59,12 @@ export class FgSegment extends Figure
     public setFromData( data: Array<any> ): void
     {        
         let r = data["V1"].toString( 16 ) ;
+        if( data["V1"] < 16 ) r = "0" + r ;
         let g = data["V2"].toString( 16 ) ;
+        if( data["V2"] < 16 ) g = "0" + g ;
         let b = data["V3"].toString( 16 ) ;
+        if( data["V3"] < 16 ) b = "0" + b ;
+
         this.couleur = "#" + r + g + b ;
         this.point1.x = data["V4"] ;
         this.point1.y = data["V5"] ;

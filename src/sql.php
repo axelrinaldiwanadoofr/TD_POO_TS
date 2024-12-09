@@ -6,7 +6,7 @@ $host = '127.0.0.1';
 $port = 3306 ;
 $db   = 'dessin2d';
 $user = 'root';
-$pass = '';
+$pass = 'root';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
