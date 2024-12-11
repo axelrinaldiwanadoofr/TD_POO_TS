@@ -3,9 +3,6 @@ import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
-import { FgRectangle } from "./FgRectangle";
-import { FgSegment } from "./FgSegment";
-import {SQL} from "./SQL" ;
 
 let message: Test ;
 message = new Test( "coucou") ;
@@ -19,8 +16,6 @@ let compteurDeClick = 0 ;
 function creeFigure()
 {
     if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
-    if( choixFigure.value == "1" ) figureCourante = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
-    if( choixFigure.value == "2" ) figureCourante = new FgRectangle( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
 
     if( figureCourante )
     {
@@ -63,35 +58,10 @@ let ctx = canvas.getContext( "2d" ) ;
 
 // On créer un dessin vide
 let dessin = new Dessin() ;
-(document.querySelector( "#nom") as HTMLInputElement).value = dessin.nom ;
-
-document.querySelector( "#btnOK" ).addEventListener( "click", async (event)=>
-{
-    dessin.nom = (document.querySelector( "#nom") as HTMLInputElement).value ;
-    alert( "Nom du dessin mis à jour" ) ;
-}) ;
 
 
 // On le dessin
 dessin.dessiner( ctx ) ;
-
-document.querySelector( "#btnSave" ).addEventListener( "click", async (event)=>
-{
-    await dessin.save() ;
-    alert( "Dessin enregistré" ) ;
-}) ;
-
-document.querySelector( "#btnLoad" ).addEventListener( "click", async (event)=>
-{
-    let nom = (document.querySelector( "#nom") as HTMLInputElement).value ;    
-
-    if( nom != "" )
-    {
-        dessin = new Dessin() ;
-        await dessin.load( nom ) ;
-        dessin.dessiner( ctx ) ;
-    }
-}) ;
 
 // Test divers
 /*

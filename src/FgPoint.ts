@@ -1,7 +1,6 @@
 
 import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
-import {SQL} from "./SQL" ;
 
 export class FgPoint extends Figure
 {
@@ -32,32 +31,4 @@ export class FgPoint extends Figure
         }    
         return true ;
     }
-
-    public async save( idDessin: number ): Promise<void>
-    {
-        let r = parseInt( this.couleur.substring( 1, 3 ) , 16 ) ;
-        let g = parseInt( this.couleur.substring( 3, 5 ), 16 ) ;
-        let b = parseInt( this.couleur.substring( 5, 7 ), 16 ) ;        
-
-        let sql = "insert into figures( type, idDessin, V1, V2, V3, V4, V5 ) values( 'FgPoint',"
-        + idDessin + "," + r + "," + g + "," + b + ","
-        + this.point.x + "," + this.point.y + ")" ;
-
-        await SQL.exec( sql ) ;
-    }
-
-    public setFromData( data: Array<any> ): void
-    {        
-        let r = data["V1"].toString( 16 ) ;
-        if( data["V1"] < 16 ) r = "0" + r ;
-        let g = data["V2"].toString( 16 ) ;
-        if( data["V2"] < 16 ) g = "0" + g ;
-        let b = data["V3"].toString( 16 ) ;
-        if( data["V3"] < 16 ) b = "0" + b ;
-
-        this.couleur = "#" + r + g + b ;
-        this.point.x = data["V4"] ;
-        this.point.y = data["V5"] ;
-    }
-
 }
