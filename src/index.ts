@@ -5,11 +5,14 @@ import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
 import { FgRectangle } from "./FgRectangle";
 import { FgSegment } from "./FgSegment";
-import {SQL} from "./SQL" ;
+import {SQL, SQLMethode} from "./SQL" ;
 
 let message: Test ;
 message = new Test( "coucou") ;
 message.afficheMessage() ;
+
+// Definit la méthode POST pour les accès à la BD
+SQL.methode = SQLMethode.POST ;
 
 // Figure courante
 let figureCourante: Figure = null ;
@@ -92,6 +95,8 @@ document.querySelector( "#btnLoad" ).addEventListener( "click", async (event)=>
         dessin.dessiner( ctx ) ;
     }
 }) ;
+
+
 
 // Test divers
 /*
