@@ -98,6 +98,7 @@ document.querySelector( "#btnLoad" ).addEventListener( "click", async (event)=>
 
 
 
+
 // Test divers
 /*
 async function execSQL()
