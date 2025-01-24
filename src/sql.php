@@ -68,4 +68,7 @@ $curseur = $pdo->query( $sql ) ;
 
 $resultat = $curseur->fetchAll( PDO::FETCH_ASSOC ) ;
 
-echo json_encode( $resultat )
+echo json_encode( $resultat ) ;
+*/
+
+?>
