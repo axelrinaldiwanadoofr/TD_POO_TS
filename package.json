@@ -20,5 +20,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "array-buffer-to-hex": "^1.0.0"
+  }
 }

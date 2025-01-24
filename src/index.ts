@@ -97,6 +97,68 @@ document.querySelector( "#btnLoad" ).addEventListener( "click", async (event)=>
 }) ;
 
 
+// Test de haschage
+
+const arrayBufferToHex = require('array-buffer-to-hex') ;
+
+async function TestDeHashage( motDePasse: string )
+{
+    let data = new TextEncoder().encode( motDePasse) ;
+    let empreinte = await crypto.subtle.digest( "SHA-1", data ) ;
+
+    console.log( "Empreinte: " + arrayBufferToHex(empreinte) ) ;
+}
+
+
+TestDeHashage( "Ceci est un mot de pBsse" ) ;
+TestDeHashage( "Ceci est un mot de pBsse" ) ;
+TestDeHashage( "Ceci est un mot de pCsse" ) ;
+
+
+// Test de chiffrement / déchiffrement AES
+async function TestDeChiffrementDechiffrementAES()
+{
+    // Générer une clé de chiffrement/déchiffrmeent AES-CBC de 128 bits
+    let key = await crypto.subtle.generateKey( 
+        { 
+            name: "AES-CBC",
+            length: 128
+        }, true, ["decrypt", "encrypt"] ) ;
+
+    let bits = await crypto.subtle.exportKey( "raw", key ) ;
+    let octets = new Uint8Array( bits ) ;
+    let keyStringHex = arrayBufferToHex( octets ) ;
+
+    console.log( "Key: " + keyStringHex ) ;
+
+    // Chiffrement d'un message
+    let message = "Bonjour, nous allons faire un test de chiffrement d'un message" ;
+    let messageData = new TextEncoder().encode( message ) ;
+
+    // Creation d'un vecteur d'initialisation aléatoire
+    let iv = crypto.getRandomValues( new Uint8Array(16) ) ;
+    console.log( "IV: " + arrayBufferToHex( iv ) ) ;
+
+    console.log( "Message: " + message ) ;
+
+    let messageChiffre = await crypto.subtle.encrypt( 
+        {
+            name: "AES-CBC",
+            iv: iv
+        }, key, messageData ) ;
+    
+    console.log( "Message chiffré: " + arrayBufferToHex(messageChiffre) ) ;
+
+    let messageOriginal = await crypto.subtle.decrypt( 
+        {
+            name: "AES-CBC",
+            iv: iv
+        }, key, messageChiffre ) ;
+    
+    console.log( "Message déchiffré: " + new TextDecoder().decode( messageOriginal ) ) ;
+}
+
+TestDeChiffrementDechiffrementAES() ;
 
 
 // Test divers
