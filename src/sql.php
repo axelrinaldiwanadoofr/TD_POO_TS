@@ -37,7 +37,7 @@ if( in_array( $algo_chiffrement_dechiffrement, $les_algo_dispo ) )
     echo "Message chiffré string hex:<br>" . bin2hex( base64_decode( $messageChiffre) . "<br>" ) ;
     echo "Message chiffré en js: <br>" . $resultatChiffreJsStringHex . "<br>";
 
-    $messageChiffre = hex2bin( $resultatChiffreJsStringHex . "3c62723e" ) ;
+    $messageChiffre = hex2bin( $resultatChiffreJsStringHex ) ;
     $messageOriginal = openssl_decrypt( 
         $messageChiffre,
         $algo_chiffrement_dechiffrement,
