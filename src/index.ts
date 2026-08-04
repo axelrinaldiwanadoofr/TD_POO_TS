@@ -3,6 +3,7 @@ import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
+import { FgSegment } from "./FgSegment";
 
 let message: Test ;
 message = new Test( "coucou") ;
@@ -16,6 +17,7 @@ let compteurDeClick = 0 ;
 function creeFigure(): void
 {
     if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
+    if( choixFigure.value == "1" ) figureCourante = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
 
     if( figureCourante )
     {
