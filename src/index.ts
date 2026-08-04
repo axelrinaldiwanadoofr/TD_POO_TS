@@ -9,11 +9,11 @@ message = new Test( "coucou") ;
 message.afficheMessage() ;
 
 // Figure courante
-let figureCourante: Figure = null ;
+let figureCourante: Figure | null = null ;
 // Compteur de click
 let compteurDeClick = 0 ;
 
-function creeFigure()
+function creeFigure(): void
 {
     if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
 
@@ -29,7 +29,10 @@ let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement 
 let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
 
 
-let canvas = document.querySelector( "canvas") ;
+let canvas = document.querySelector( "canvas") as HTMLCanvasElement ;
+
+let ctx = canvas.getContext( "2d" ) ;
+
 canvas.addEventListener( "click", (event)=>
 {
     if( !figureCourante )
@@ -50,11 +53,10 @@ canvas.addEventListener( "click", (event)=>
         }
     }
 
-    ctx.clearRect( 0, 0, 800, 600 )
+    ctx?.clearRect( 0, 0, 800, 600 )
     dessin.dessiner( ctx ) ;
 });
 
-let ctx = canvas.getContext( "2d" ) ;
 
 // On créer un dessin vide
 let dessin = new Dessin() ;

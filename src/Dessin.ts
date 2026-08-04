@@ -16,11 +16,14 @@ export class Dessin
         this.figures.push( f ) ;
     }
 
-    public dessiner( ctx: CanvasRenderingContext2D ): void
+    public dessiner( ctx: CanvasRenderingContext2D | null ): void
     {
-        for( let i=0; i<this.figures.length; i++ )
+        if( ctx )
         {
-            this.figures[i].dessiner( ctx ) ;
+            for( let i=0; i<this.figures.length; i++ )
+            {
+                this.figures[i].dessiner( ctx ) ;
+            }
         }
     }
 }
