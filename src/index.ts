@@ -4,68 +4,74 @@ import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
 import {FgPoint} from "./FgPoint" ;
 import { FgSegment } from "./FgSegment";
+import { VwDessin } from "./VwDessin";
 
-let message: Test ;
-message = new Test( "coucou") ;
-message.afficheMessage() ;
+customElements.define( "vw-dessin", VwDessin ) ;
 
-// Figure courante
-let figureCourante: Figure | null = null ;
-// Compteur de click
-let compteurDeClick = 0 ;
-
-function creeFigure(): void
+function creeFigure( dessin: Dessin ): Figure | null
 {
-    if( choixFigure.value == "0" ) figureCourante = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
-    if( choixFigure.value == "1" ) figureCourante = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
+    let nouvelleFigure : Figure | null = null ;
+    let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
+    let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
 
-    if( figureCourante )
+    if( choixFigure.value == "0" ) nouvelleFigure = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
+    if( choixFigure.value == "1" ) nouvelleFigure = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
+
+    if( nouvelleFigure )
     {
-        dessin.ajoute( figureCourante ) ;
-        dessin.dessiner( ctx ) ;
+        dessin.ajoute( nouvelleFigure ) ;
+        return nouvelleFigure ;
     }
+    return null ;
 } 
 
-let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
 
-let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
-
-
-let canvas = document.querySelector( "canvas") as HTMLCanvasElement ;
-
-let ctx = canvas.getContext( "2d" ) ;
-
-canvas.addEventListener( "click", (event)=>
+setTimeout( ()=> 
 {
-    if( !figureCourante )
-    {
-        creeFigure() ;
-    }
+    let message: Test ;
+    message = new Test( "coucou") ;
+    message.afficheMessage() ;
 
-    if( figureCourante )
-    {
-        compteurDeClick++ ;
-        // On crée un point à partir des coordonnées de la souri
-        let souri: Point = new Point( event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop ) ;
+    // Figure courante
+    let figureCourante: Figure | null = null ;
+    // Compteur de click
+    let compteurDeClick = 0 ;
 
-        if( figureCourante.setByClick( souri, compteurDeClick) )
+
+
+    let canvas = document.querySelector( "canvas") as HTMLCanvasElement ;
+    let ctx = canvas.getContext( "2d" ) ;
+
+    canvas.addEventListener( "click", (event)=>
+    {
+        if( !figureCourante )
         {
-            figureCourante = null ;
-            compteurDeClick = 0 ;
+            figureCourante = creeFigure( dessin ) ;
         }
-    }
 
-    ctx?.clearRect( 0, 0, 800, 600 )
+        if( figureCourante )
+        {
+            compteurDeClick++ ;
+            // On crée un point à partir des coordonnées de la souri
+            let souri: Point = new Point( event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop ) ;
+
+            if( figureCourante.setByClick( souri, compteurDeClick) )
+            {
+                figureCourante = null ;
+                compteurDeClick = 0 ;
+            }
+        }
+
+        ctx?.clearRect( 0, 0, 800, 600 )
+        dessin.dessiner( ctx ) ;
+    });
+
+    // On créer un dessin vide
+    let dessin = new Dessin() ;
+
+    // On le dessin
     dessin.dessiner( ctx ) ;
-});
-
-
-// On créer un dessin vide
-let dessin = new Dessin() ;
-
-
-// On le dessin
-dessin.dessiner( ctx ) ;
+}, 500 ) ;
 
 // Test divers
 /*
