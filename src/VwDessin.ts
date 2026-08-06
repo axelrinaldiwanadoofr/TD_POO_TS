@@ -42,12 +42,11 @@ export class VwDessin extends HTMLElement
         this._hauteur = v ;
     }
 
-    _updateRendering() 
+    public async _updateRendering() : Promise<void>
     {
-        // Left as an exercise for the reader. But, you'll probably want to
-        // check this.ownerDocument.defaultView to see if we've been
-        // inserted into a document with a browsing context, and avoid
-        // doing any work if not.
+        let reponseHttp = await fetch( "../src/VwDessin.html" ) ;
+        let html = await reponseHttp.text() ;
+        this.innerHTML = html ;
     }    
 }
 
