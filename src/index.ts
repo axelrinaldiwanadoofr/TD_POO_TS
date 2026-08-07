@@ -1,30 +1,9 @@
 import {Test} from "./Test"
-import {Figure} from "./Figure" ;
-import {Point} from "./Point" ;
 import {Dessin} from "./Dessin" ;
-import {FgPoint} from "./FgPoint" ;
-import { FgSegment } from "./FgSegment";
 import { VwDessin } from "./VwDessin";
 
+
 customElements.define( "vw-dessin", VwDessin ) ;
-
-function creeFigure( dessin: Dessin ): Figure | null
-{
-    let nouvelleFigure : Figure | null = null ;
-    let choixCouleur = document.querySelector( "#choixCouleur") as HTMLInputElement ;
-    let choixFigure = document.querySelector( "#choixFigure") as HTMLSelectElement ;
-
-    if( choixFigure.value == "0" ) nouvelleFigure = new FgPoint( new Point(0, 0), choixCouleur.value ) ;
-    if( choixFigure.value == "1" ) nouvelleFigure = new FgSegment( new Point(0, 0), new Point(0, 0), choixCouleur.value ) ;
-
-    if( nouvelleFigure )
-    {
-        dessin.ajoute( nouvelleFigure ) ;
-        return nouvelleFigure ;
-    }
-    return null ;
-} 
-
 
 setTimeout( ()=> 
 {
@@ -32,6 +11,7 @@ setTimeout( ()=>
     message = new Test( "coucou") ;
     message.afficheMessage() ;
 
+    /*
     // Figure courante
     let figureCourante: Figure | null = null ;
     // Compteur de click
@@ -71,6 +51,7 @@ setTimeout( ()=>
 
     // On le dessin
     dessin.dessiner( ctx ) ;
+    */
 }, 500 ) ;
 
 // Test divers

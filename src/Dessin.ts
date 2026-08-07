@@ -1,10 +1,10 @@
 
-import {FgPoint } from "./FgPoint";
 import {Figure} from "./Figure" ;
 
 export class Dessin
 {
-    protected figures: Array<Figure> ;
+    protected   figures: Array<Figure> ;
+    static      modeles: Map<string,Figure> ;
 
     constructor()
     {
@@ -25,5 +25,17 @@ export class Dessin
                 this.figures[i].dessiner( ctx ) ;
             }
         }
+    }
+
+    public static ajouteModele( nom: string, modele: Figure ): void
+    {
+        Dessin.modeles.set( nom, modele ) ;
+    }
+
+    public static creeFigure( nom: string ): Figure | null
+    {
+        let modele = Dessin.modeles.get( nom ) ;
+        if( modele ) return modele.cloner() ;
+        return null ;
     }
 }

@@ -6,15 +6,13 @@ export class FgSegment extends Figure
 {
     protected point0: Point ;
     protected point1: Point ;
-    protected couleur: string ;
 
-    constructor( point0: Point= new Point(0,0), point1: Point= new Point(0,0),  couleur: string="#000000" )
+    constructor( point0: Point= new Point(0,0), point1: Point= new Point(0,0),  couleur: string="#000000", largeur: number = 3 )
     {
-        super() ;
+        super( couleur, largeur ) ;
 
         this.point0 = point0 ;
         this.point1 = point1 ;
-        this.couleur = couleur ;
     }
 
     public dessiner(ctx: CanvasRenderingContext2D): void 
@@ -22,8 +20,8 @@ export class FgSegment extends Figure
         ctx.beginPath() ;
         ctx.moveTo( this.point0.x, this.point0.y ) ;
         ctx.lineTo( this.point1.x, this.point1.y ) ;
-        ctx.strokeStyle = this.couleur ;
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = this._couleur ;
+        ctx.lineWidth = this._largeur ;
         ctx.stroke();        
     }
 
@@ -42,4 +40,10 @@ export class FgSegment extends Figure
         }    
         return true ;
     }
+
+    public cloner(): Figure
+    {
+        return new FgSegment( this.point0, this.point1, this._couleur, this._largeur ) ;
+    }
+
 }
