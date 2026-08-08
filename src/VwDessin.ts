@@ -77,6 +77,13 @@ export class VwDessin extends HTMLElement
 
         this.shadow = this.attachShadow({ mode: "open" });        
 
+        reponseHttp = await fetch( "../src/VwDessin.css" ) ;
+        let sheetText = await reponseHttp.text() ;
+
+        const sheet = new CSSStyleSheet();
+        sheet.replaceSync( sheetText ) ;
+        this.shadow.adoptedStyleSheets.push( sheet ) ; 
+
         this.shadow.innerHTML = html ;
 
         this.canvas = this.shadow.querySelector( "canvas") as HTMLCanvasElement ;
