@@ -17,7 +17,7 @@ export class VwDessin extends HTMLElement
     // Figure courante et compteur de click
     protected figureCourante: Figure | null = null ;
     protected compteurDeClick = 0 ;
-
+    protected shadow: ShadowRoot | null = null ;
     protected canvas : HTMLCanvasElement | null = null ;
 
     constructor() 
@@ -35,8 +35,8 @@ export class VwDessin extends HTMLElement
     public creeFigure(): Figure | null
     {
         let nouvelleFigure : Figure | null = null ;
-        let choixCouleur = this.querySelector( "#choixCouleur") as HTMLInputElement ;
-        let choixFigure = this.querySelector( "#choixFigure") as HTMLSelectElement ;
+        let choixCouleur = this.shadow?.querySelector( "#choixCouleur") as HTMLInputElement ;
+        let choixFigure = this.shadow?.querySelector( "#choixFigure") as HTMLSelectElement ;
 
         nouvelleFigure = this.fabrique.clone( choixFigure.value ) as Figure ;
 
@@ -75,9 +75,11 @@ export class VwDessin extends HTMLElement
         if( hauteur ) html = html.replace( "hauteur", hauteur ) ;
         else html = html.replace( "hauteur", "150" ) ;
 
-        this.innerHTML = html ;
+        this.shadow = this.attachShadow({ mode: "open" });        
 
-        this.canvas = this.querySelector( "canvas") as HTMLCanvasElement ;
+        this.shadow.innerHTML = html ;
+
+        this.canvas = this.shadow.querySelector( "canvas") as HTMLCanvasElement ;
 
         if( this.canvas )
         {   
