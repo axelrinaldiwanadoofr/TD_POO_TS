@@ -19,8 +19,6 @@ export class VwDessin extends HTMLElement
     protected compteurDeClick = 0 ;
 
     protected canvas : HTMLCanvasElement | null = null ;
-    protected stylo : CanvasRenderingContext2D | null = null ;
-
 
     constructor() 
     {
@@ -65,17 +63,24 @@ export class VwDessin extends HTMLElement
 
     async connectedCallback() 
     {
+        let largeur = this.getAttribute( "largeur" ) ;
+        let hauteur = this.getAttribute( "hauteur" ) ;
+
         let reponseHttp = await fetch( "../src/VwDessin.html" ) ;
         let html = await reponseHttp.text() ;
+
+        if( largeur ) html = html.replace( "largeur", largeur ) ;
+        else html = html.replace( "largeur", "300" ) ;
+
+        if( hauteur ) html = html.replace( "hauteur", hauteur ) ;
+        else html = html.replace( "hauteur", "150" ) ;
+
         this.innerHTML = html ;
 
         this.canvas = this.querySelector( "canvas") as HTMLCanvasElement ;
 
         if( this.canvas )
         {   
-            // Cree un outil de dessin 2D         
-            this.stylo = this.canvas.getContext( "2d" ) ;
-
             this.canvas.addEventListener( "click", (event)=>
             {
                 if( !this.figureCourante )
@@ -124,10 +129,11 @@ export class VwDessin extends HTMLElement
 
     public async updateRendering() : Promise<void>
     {
-        if( this.stylo && this.dessin )
+        if( this.canvas && this.dessin )
         {
-            this.stylo?.clearRect( 0, 0, this._largeur, this._hauteur )
-            this.dessin?.dessiner( this.stylo ) ;
+            let stylo = this.canvas.getContext( "2d" ) ;
+            stylo?.clearRect( 0, 0, this._largeur, this._hauteur )
+            this.dessin?.dessiner( stylo ) ;
         }        
     }    
 }
