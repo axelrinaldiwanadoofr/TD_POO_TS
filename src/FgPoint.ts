@@ -1,38 +1,41 @@
 
-import {Figure} from "./Figure" ;
 import {Point} from "./Point" ;
+import {Figure} from "./Figure" ;
 
 export class FgPoint extends Figure
 {
-    protected point: Point ;
+    protected x: number = 0 ;
+    protected y: number = 0 ;
 
-    constructor( point: Point= new Point(0,0), couleur: string="#000000", largeur: number = 3 )
+    constructor( x: number, y: number, couleur: string="#000000", epaisseur: number = 3 )
     {
-        super( couleur, largeur ) ;
+        super( couleur, epaisseur ) ;
 
-        this.point = point ;
+        this.x = x ;
+        this.y = y ;
     }
 
-    public dessiner(ctx: CanvasRenderingContext2D): void 
+    public dessiner( stylo: CanvasRenderingContext2D): void 
     {
-        ctx.beginPath() ;
-        ctx.arc( this.point.x, this.point.y, this._largeur, 0, Math.PI*2 ) ;
-        ctx.fillStyle = this.couleur ;
-        ctx.fill() ;
+        stylo.beginPath() ;
+        stylo.arc( this.x, this.y, this._epaisseur, 0, Math.PI*2 ) ;
+        stylo.fillStyle = this._couleur ;
+        stylo.fill() ;
     }
 
-    public setByClick(souri: Point, numClick: number): boolean 
+    public definirPointParPoint( xm: number, ym: number, numPoint: number): boolean 
     {
-        if( numClick == 1 )
+        if( numPoint == 1 )
         {
-            this.point = souri ;
+            this.x = xm ;
+            this.y = ym ;
         }    
         return true ;
     }
 
     public cloner(): Figure
     {
-        return new FgPoint( this.point, this._couleur, this._largeur ) ;
+        return new FgPoint( this.x, this.y, this._couleur, this._epaisseur ) ;
     }
 
 }

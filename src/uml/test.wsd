@@ -1,0 +1,12 @@
+
+@startuml
+
+object unTest
+
+object Message {
+message = "Coucou"
+}
+
+unTest --> Message
+
+@enduml

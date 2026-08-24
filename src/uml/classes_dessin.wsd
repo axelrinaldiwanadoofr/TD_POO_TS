@@ -1,0 +1,39 @@
+@startuml
+
+
+class Dessin {
+    + void dessiner( CanvasRenderingContext2D ctx)
+    + void ajouter( Figure uneFigure )
+}
+
+class Figure {
+    # couleur: string
+    # epaisseur: number
+    + construtor( couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+}
+
+class FgPoint {
+    # x: number
+    # y: number
+    + construtor( x: number, y: number, couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+}
+
+class FgSegment {
+    # x1: number
+    # y1: number
+    # x2: number
+    # y2: number
+    + construtor( x1: number, y1: number, x2: number, y2: number, couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+}
+
+Dessin *-right- Figure: figures
+FgPoint --|> Figure
+FgSegment --|> Figure
+
+@enduml

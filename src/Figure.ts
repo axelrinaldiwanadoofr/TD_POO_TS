@@ -4,12 +4,12 @@ import { Clonable } from "./FabriqueClone";
 export class Figure implements Clonable<Figure>
 {
     protected _couleur: string = "black" ;
-    protected _largeur: number = 3 ;
+    protected _epaisseur: number = 3 ;
 
-    constructor( couleur: string = "black", largeur: number = 3 )
+    constructor( couleur: string = "black", epaisseur: number = 3 )
     {
         this.couleur = couleur ;
-        this.largeur = largeur ;
+        this.epaisseur = largeur ;
     }
 
     public get couleur(): string
@@ -27,21 +27,21 @@ export class Figure implements Clonable<Figure>
         this._couleur = "#" + rouge + vert + bleu ;
     }
 
-    public get largeur()
+    public get epaisseur()
     {
-        return this._largeur ;
+        return this._epaisseur ;
     }
 
-    public set largeur( valeur: number )
+    public set epaisseur( valeur: number )
     {
-        this._largeur = valeur ;
+        this._epaisseur = valeur ;
     }
 
     public dessiner( ctx: CanvasRenderingContext2D ): void
     {
     }
 
-    public setByClick( souri: Point, numClick: number ): boolean
+    public definirPointParPoint( xm: number, ym: number, numPoint: number): boolean 
     {
         return true ;
     }

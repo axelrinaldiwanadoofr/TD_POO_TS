@@ -1,0 +1,21 @@
+
+@startuml
+
+
+
+package Dessin {
+usecase "Choisir un type de figure" as Use1
+usecase "Choisir une couleur" as Use2
+usecase "Choisir une épaisseur" as Use3
+usecase "Créer la figure du type choisie" as Use4
+usecase "Compléter la figure du type choisie" as Use5
+
+:Utilisateur: --> (Use1)
+:Utilisateur: --> (Use2)
+:Utilisateur: --> (Use3)
+:Utilisateur: --> (Use4)
+:Utilisateur: --> (Use5)
+
+}
+
+@enduml
