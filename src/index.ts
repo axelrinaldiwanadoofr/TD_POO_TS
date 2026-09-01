@@ -1,58 +1,53 @@
-import {Test} from "./Test"
+//import {Test} from "./Test"
+import {Figure} from "./Figure" ;
+import {FgPoint } from "./FgPoint";
+import {FgSegment} from "./FgSegment" ;
+import {IDessin} from "./IDessin" ;
 import {Dessin} from "./Dessin" ;
-import { VwDessin } from "./VwDessin";
+//import { VwDessin } from "./VwDessin";
 
 
-customElements.define( "vw-dessin", VwDessin ) ;
+//customElements.define( "vw-dessin", VwDessin ) ;
+
 
 setTimeout( ()=> 
 {
-    let message: Test ;
-    message = new Test( "coucou") ;
-    message.afficheMessage() ;
-
-    /*
-    // Figure courante
-    let figureCourante: Figure | null = null ;
+    // Cree un dessin
+    let dessin: IDessin = new Dessin() ;
     // Compteur de click
     let compteurDeClick = 0 ;
 
-
-
     let canvas = document.querySelector( "canvas") as HTMLCanvasElement ;
-    let ctx = canvas.getContext( "2d" ) ;
+    let stylo = canvas.getContext( "2d" ) ;
 
     canvas.addEventListener( "click", (event)=>
     {
-        if( !figureCourante )
+        if( !compteurDeClick )
         {
-            figureCourante = creeFigure( dessin ) ;
-        }
-
-        if( figureCourante )
-        {
-            compteurDeClick++ ;
-            // On crée un point à partir des coordonnées de la souri
-            let souri: Point = new Point( event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop ) ;
-
-            if( figureCourante.setByClick( souri, compteurDeClick) )
+            let couleur = (document.getElementById( "choixCouleur" ) as HTMLInputElement).value ;
+            let epaisseur = parseInt( (document.getElementById( "choixEpaisseur" ) as HTMLInputElement).value ) ;
+            let nomType = (document.getElementById( "choixFigure" ) as HTMLSelectElement).value ;
+            if( dessin.creerEtAjouterNouvelleFigure( nomType, couleur, epaisseur ) )
             {
-                figureCourante = null ;
-                compteurDeClick = 0 ;
+               compteurDeClick++ ; 
             }
         }
 
-        ctx?.clearRect( 0, 0, 800, 600 )
-        dessin.dessiner( ctx ) ;
+        if( compteurDeClick )
+        {
+            // On calcule la position du point à partir des coordonnées de la souri
+            let xm = event.clientX - canvas.offsetLeft ;
+            let ym = event.clientY - canvas.offsetTop ;
+
+            if( dessin.definirPointParPoint( xm, ym, compteurDeClick) ) compteurDeClick = 0 ;
+            else compteurDeClick++ ;
+        }
+
+        stylo?.clearRect( 0, 0, 800, 600 )
+        dessin.dessiner( stylo ) ;
     });
-
-    // On créer un dessin vide
-    let dessin = new Dessin() ;
-
-    // On le dessin
-    dessin.dessiner( ctx ) ;
-    */
 }, 500 ) ;
+
 
 // Test divers
 /*
@@ -103,4 +98,18 @@ ctx.rotate( Math.PI/4 ) ;
 // Dessin d'un rectangle colorié en bleu ciel
 ctx.fillStyle = "#F0FF00" ;
 ctx.fillRect( 0, 0, 100, 50 ) ;
+*/
+
+/*
+let dessin = new Dessin() ;
+dessin.ajoute( new FgPoint( 100, 100 ) ) ;
+dessin.ajoute( new FgPoint( 150, 150 ) ) ;
+
+//let canvas = document.getElementById( "ZoneDeDessin") as HTMLCanvasElement ;
+//let stylo = canvas.getContext( "2d" ) ;
+
+let canvas = document.getElementById( "ZoneDeDessin") ;
+let stylo = (canvas as HTMLCanvasElement).getContext( "2d" ) ;
+
+dessin.dessiner( stylo ) ;
 */

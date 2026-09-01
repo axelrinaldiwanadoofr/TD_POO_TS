@@ -1,0 +1,59 @@
+
+
+
+@startuml
+actor Utilisateur as utilisateur
+participant IHM as ihm
+participant Dessin as dessin
+participant Figure as figure
+utilisateur -> ihm: sélectionner une couleur
+utilisateur -> ihm: sélectionner une épaisseur de trait
+utilisateur -> ihm: sélectionner type de figure
+utilisateur -> ihm: premier clique 
+activate ihm
+ihm -> dessin: creerEtAjouterNouvelleFigure
+activate dessin
+dessin -> figure: constructor
+activate figure
+deactivate figure
+deactivate dessin
+ihm -> dessin: definirPointParPoint
+activate dessin
+dessin -> figure: definirPointParPoint
+activate figure
+figure -> dessin
+deactivate figure
+dessin -> ihm
+deactivate dessin
+ihm -> dessin: dessiner
+activate dessin
+loop sur toutes les figures
+    dessin -> figure: dessiner
+    activate figure
+    deactivate figure
+end
+deactivate dessin
+deactivate ihm
+loop autant de fois que nécessaire pour définir la figure
+    utilisateur -> ihm: cliques suivants
+    activate ihm
+    ihm -> dessin: definirPointParPoint
+    activate dessin
+    dessin -> figure: definirPointParPoint
+    activate figure
+    figure -> dessin
+    deactivate figure
+    dessin -> ihm
+    deactivate dessin
+    ihm -> dessin: dessiner
+    activate dessin
+    loop sur toutes les figures
+        dessin -> figure: dessiner
+        activate figure
+        deactivate figure
+    end
+    deactivate dessin
+    deactivate ihm
+end
+@enduml
+

@@ -9,7 +9,7 @@ export class Figure implements Clonable<Figure>
     constructor( couleur: string = "black", epaisseur: number = 3 )
     {
         this.couleur = couleur ;
-        this.epaisseur = largeur ;
+        this.epaisseur = epaisseur ;
     }
 
     public get couleur(): string

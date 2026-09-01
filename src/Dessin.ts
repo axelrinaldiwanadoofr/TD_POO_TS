@@ -1,7 +1,9 @@
-
+import {IDessin} from "./IDessin" ;
 import {Figure} from "./Figure" ;
+import {FgPoint} from "./FgPoint";
+import {FgSegment } from "./FgSegment";
 
-export class Dessin
+export class Dessin implements IDessin
 {
     protected   figures: Array<Figure> ;
 
@@ -25,4 +27,27 @@ export class Dessin
             }
         }
     }
+
+    public definirPointParPoint( x: number, y: number, numClic: number ): boolean
+    {
+        let derniereFigure = this.figures.at( -1 ) ;
+        if( derniereFigure ) return derniereFigure.definirPointParPoint( x, y, numClic ) ;
+        return true ;
+    }
+
+    public creerEtAjouterNouvelleFigure( nomType : string, couleur : string, epaisseur : number) : boolean
+    {
+        if( nomType == "point" )
+        {
+            this.ajoute( new FgPoint( 0, 0, couleur, epaisseur ) ) ;
+            return true ;
+        }
+        else if( nomType == "segment" )
+        {
+            this.ajoute( new FgSegment( 0, 0, 0, 0, couleur, epaisseur )) ;
+            return true ;
+        }
+        return false ;
+    }
+
 }

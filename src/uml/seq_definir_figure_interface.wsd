@@ -1,0 +1,33 @@
+@startuml
+actor Utilisateur as utilisateur
+participant IHM as ihm
+boundary IDessin as dessin
+utilisateur -> ihm: sélectionner une couleur
+utilisateur -> ihm: sélectionner une épaisseur de trait
+utilisateur -> ihm: sélectionner type de figure
+utilisateur -> ihm: premier clique 
+activate ihm
+ihm -> dessin: creerEtAjouterNouvelleFigure
+activate dessin
+deactivate dessin
+ihm -> dessin: definirPointParPoint
+activate dessin
+dessin -> ihm
+deactivate dessin
+ihm -> dessin: dessiner
+activate dessin
+deactivate dessin
+deactivate ihm
+loop autant de fois que nécessaire pour définir la figure
+utilisateur -> ihm: cliques suivants
+activate ihm
+ihm -> dessin: definirPointParPoint
+activate dessin
+dessin -> ihm
+deactivate dessin
+ihm -> dessin: dessiner
+activate dessin
+deactivate dessin
+deactivate ihm
+end
+@enduml

@@ -28,8 +28,8 @@ export class VwDessin extends HTMLElement
         this.dessin = new Dessin() ;
 
         // Ajout des modèles utilisables pour le dessin
-        this.fabrique.ajouter( "point", new FgPoint( new Point(0, 0) ) ) ;
-        this.fabrique.ajouter( "segment", new FgSegment( new Point(0, 0), new Point(0, 0) ) ) ;
+        this.fabrique.ajouter( "point", new FgPoint( 0, 0 ) ) ;
+        this.fabrique.ajouter( "segment", new FgSegment( 0, 0, 0, 0 ) ) ;
     }
 
     public creeFigure(): Figure | null
@@ -102,9 +102,10 @@ export class VwDessin extends HTMLElement
                     this.compteurDeClick++ ;
 
                     // On crée un point à partir des coordonnées de la souri
-                    let souri: Point = new Point( event.clientX - this.canvas.offsetLeft, event.clientY - this.canvas.offsetTop ) ;
+                    let xm = event.clientX - this.canvas.offsetLeft ; 
+                    let ym = event.clientY - this.canvas.offsetTop ;
         
-                    if( this.figureCourante.setByClick( souri, this.compteurDeClick) )
+                    if( this.figureCourante.definirPointParPoint( xm, ym, this.compteurDeClick) )
                     {
                         this.figureCourante = null ;
                         this.compteurDeClick = 0 ;

@@ -4,23 +4,24 @@
 	    <title>Mon projet TS</title>
 	    <meta name="viewport" content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	    <link href="main.css" rel="stylesheet">
-	    <script src="bundle.js"></script>
 	</head>
 	<body>
 		<div id="contenu"></div>
         <h1>Dessin 2D</h1>
-		<!--
 		<div>
 			<label>Couleur:</label>
 			<input id="choixCouleur" type="color">
+			<label>Epaisseur:</label>
+			<input id="choixEpaisseur" type="number" value="3">
 			<label>Choix du type de figure:</label>
 			<select id="choixFigure">
-				<option value="-1"></option>
-				<option value="0">point</option>
-				<option value="1">segment</option>
+				<option value="null"></option>
+				<option value="point">point</option>
+				<option value="segment">segment</option>
 			</select>
 		</div>-->
         <canvas id="ZoneDeDessin" width="800" height="600"></canvas>
-		<vw-dessin largeur="400" hauteur="300"></vw-dessin>
+		<!--<vw-dessin largeur="400" hauteur="300"></vw-dessin>-->
+	    <script src="bundle.js"></script>
 	</body>
 </html>

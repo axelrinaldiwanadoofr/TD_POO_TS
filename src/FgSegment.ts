@@ -1,41 +1,47 @@
 
 import {Figure} from "./Figure" ;
-import {Point} from "./Point" ;
 
 export class FgSegment extends Figure
 {
-    protected point0: Point ;
-    protected point1: Point ;
+    protected x1: number ;
+    protected y1: number ;
+    protected x2: number ;
+    protected y2: number ;
 
-    constructor( point0: Point= new Point(0,0), point1: Point= new Point(0,0),  couleur: string="#000000", largeur: number = 3 )
+    constructor( x1: number, y1: number, x2: number, y2: number, couleur: string="#000000", largeur: number = 3 )
     {
         super( couleur, largeur ) ;
 
-        this.point0 = point0 ;
-        this.point1 = point1 ;
+        this.x1 = x1 ;
+        this.y1 = y1 ;
+        this.x2 = x2 ;
+        this.y2 = y2 ;
     }
 
     public dessiner(ctx: CanvasRenderingContext2D): void 
     {
         ctx.beginPath() ;
-        ctx.moveTo( this.point0.x, this.point0.y ) ;
-        ctx.lineTo( this.point1.x, this.point1.y ) ;
+        ctx.moveTo( this.x1, this.y1 ) ;
+        ctx.lineTo( this.x2, this.y2 ) ;
         ctx.strokeStyle = this._couleur ;
-        ctx.lineWidth = this._largeur ;
+        ctx.lineWidth = this._epaisseur ;
         ctx.stroke();        
     }
 
-    public setByClick(souri: Point, numClick: number): boolean 
+    public definirPointParPoint( xm: number, ym: number, numPoint: number): boolean 
     {
-        if( numClick == 1 )
+        if( numPoint == 1 )
         {
-            this.point0 = souri ;
-            this.point1 = souri ;
+            this.x1 = xm ;
+            this.y1 = ym ;
+            this.x2 = xm ;
+            this.y2 = ym ;
             return false ;
         }    
-        else if( numClick == 2 )
+        else if( numPoint == 2 )
         {
-            this.point1 = souri ;
+            this.x2 = xm ;
+            this.y2 = ym ;
             return true ;
         }    
         return true ;
@@ -43,7 +49,7 @@ export class FgSegment extends Figure
 
     public cloner(): Figure
     {
-        return new FgSegment( this.point0, this.point1, this._couleur, this._largeur ) ;
+        return new FgSegment( this.x1, this.y1, this.x2, this.y2, this._couleur, this._epaisseur ) ;
     }
 
 }
