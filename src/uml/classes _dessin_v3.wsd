@@ -1,0 +1,54 @@
+@startuml
+interface IDessin {
+    + {abstract} void dessiner( CanvasRenderingContext2D ctx)
+    + {abstract} void creerEtAjouterNouvelleFigure(string nomType, string couleur, number epaisseur)
+    + {abstract} boolean definirPointParPoint( number xm, number ym, number numPoint) 
+}
+
+class IHM
+
+class Dessin {
+    + void dessiner( CanvasRenderingContext2D ctx)
+    + void ajouter( Figure uneFigure )
+    + void creerEtAjouterNouvelleFigure(string nomType, string couleur, number epaisseur)
+    + boolean definirPointParPoint( number xm, number ym, number numPoint) 
+    + {static} void ajouterModele( string nomType, Figure modele )
+    + {static} Figure creerFigure( string nomType )
+}
+
+class Figure {
+    # couleur: string
+    # epaisseur: number
+    + construtor( couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+    + cloner(): Figure
+}
+
+class FgPoint {
+    # x: number
+    # y: number
+    + construtor( x: number, y: number, couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+    + cloner(): Figure
+}
+
+class FgSegment {
+    # x1: number
+    # y1: number
+    # x2: number
+    # y2: number
+    + construtor( x1: number, y1: number, x2: number, y2: number, couleur: string, epaisseur: number )
+    + dessiner( stylo : CanvasRenderingContext2D ): void
+    + definirPointParPoint( x: number, y: number, numPoint: number ): boolean
+    + cloner(): Figure
+}
+
+IHM -left-> IDessin: dessin
+Dessin ..|> IDessin: implements
+Dessin *-right- Figure: figures
+Dessin *-right- Figure: modeles
+FgPoint --|> Figure
+FgSegment --|> Figure
+@enduml

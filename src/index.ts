@@ -9,6 +9,9 @@ import {Dessin} from "./Dessin" ;
 
 //customElements.define( "vw-dessin", VwDessin ) ;
 
+// Crée les modèles de figure
+Dessin.ajouterModele( "point", new FgPoint( 0, 0, "#000000", 3 )) ;
+Dessin.ajouterModele( "segment", new FgSegment( 0, 0, 0, 0, "#000000", 3 )) ;
 
 setTimeout( ()=> 
 {

@@ -1,11 +1,11 @@
-import {IDessin} from "./IDessin" ;
 import {Figure} from "./Figure" ;
-import {FgPoint} from "./FgPoint";
-import {FgSegment } from "./FgSegment";
+import {IDessin} from "./IDessin" ;
 
 export class Dessin implements IDessin
 {
     protected   figures: Array<Figure> ;
+
+    protected static modeles: Map<string,Figure> = new Map<string,Figure>() ;
 
     constructor()
     {
@@ -37,17 +37,24 @@ export class Dessin implements IDessin
 
     public creerEtAjouterNouvelleFigure( nomType : string, couleur : string, epaisseur : number) : boolean
     {
-        if( nomType == "point" )
+        let figure = Dessin.creerFigure( nomType ) ;
+        if( figure )
         {
-            this.ajoute( new FgPoint( 0, 0, couleur, epaisseur ) ) ;
-            return true ;
-        }
-        else if( nomType == "segment" )
-        {
-            this.ajoute( new FgSegment( 0, 0, 0, 0, couleur, epaisseur )) ;
+            this.figures.push( figure ) ;
             return true ;
         }
         return false ;
     }
 
+    public static ajouterModele( nomType: string, modele: Figure ): void
+    {
+        Dessin.modeles.set( nomType, modele ) ;
+    }
+
+    public static creerFigure( nomType: string ): Figure | null
+    {
+        let modele =  Dessin.modeles.get( nomType ) ;
+        if( modele ) return modele.cloner() ;
+        return null ;
+    }
 }
