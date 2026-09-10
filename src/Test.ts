@@ -15,7 +15,8 @@ export class Test
 
     private toto(): void
     {
-
+        let div = document.getElementById( "contenu" ) ;
+        if( div ) div.innerHTML = this.message ;
     }
 
 }
