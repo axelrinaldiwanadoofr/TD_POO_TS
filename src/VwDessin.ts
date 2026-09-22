@@ -127,5 +127,11 @@ export class VwDessin extends HTMLElement
             this.dessin?.dessiner( stylo ) ;
         }        
     }    
+
+    public setDessin( dessin: Dessin ): void
+    {
+        this.dessin = dessin ;
+        this.updateRendering() ;
+    }
 }
 

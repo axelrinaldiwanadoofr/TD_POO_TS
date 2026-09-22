@@ -8,7 +8,14 @@
 	<body>
 		<div id="contenu"></div>
         <h1>Dessin 2D</h1>
-		<vw-dessin largeur="400" hauteur="300"></vw-dessin>
+		<div>
+			<label>Liste des dessins:</label>
+			<select id="listeDessin">
+			</select>
+			<button id="chargeDessin">Charger le dessin</button>
+		</div>
+
+		<vw-dessin id="vwDessin" largeur="400" hauteur="300"></vw-dessin>
 	    <script src="bundle.js"></script>
 	</body>
 </html>
