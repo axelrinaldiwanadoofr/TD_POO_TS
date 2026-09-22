@@ -12,6 +12,7 @@
       "target": "ES2022",
       "allowJs": true,
       "noImplicitAny": false,
+      "experimentalDecorators": true,
     },
     "include": ["src"]
   }

@@ -5,6 +5,22 @@ import {FgSegment} from "./FgSegment" ;
 import {IDessin} from "./IDessin" ;
 import {Dessin} from "./Dessin" ;
 //import { VwDessin } from "./VwDessin";
+import {reportableClassDecorator, IMaMethode } from "./Component" ;
+
+@reportableClassDecorator
+class BugReport {
+  type = "report";
+  title: string;
+ 
+  constructor(t: string) {
+    this.title = t;
+  }
+}
+
+
+let bug = new BugReport( "toto" ) ;
+console.log( bug.type + " " + bug.title ) ;
+bug.maMethode() ;
 
 
 //customElements.define( "vw-dessin", VwDessin ) ;
