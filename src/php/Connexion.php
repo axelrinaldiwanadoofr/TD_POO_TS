@@ -4,16 +4,10 @@
     * qui utilise les services de la classe PDO
     */
 
-   class Connexion{   	
-	//Attribut statique
+   class Connexion
+   {   	
+	    //Attribut statique
         private static PDO | null $connexion = null ;
-
-        /**
-         * Constructeur privé vide
-         */				
-        private function __construct()
-        {
-        }
 
         /**
         * Méthode statique qui renvoie l'unique instance de Connexion
@@ -23,7 +17,7 @@
             if(!self::$connexion)
             {
                 $serveur = 'mysql:host=localhost:3306;';
-                $bdd = 'dbname=fdlcdb';   		
+                $bdd = 'dbname=dessins';   		
                 $user = 'root' ; 
                 $mdp = 'root' ;
 
@@ -40,13 +34,5 @@
             }
             return self::$connexion;
         }
-
-        /**
-        * Destructeur qui libère l'objet
-        **/
-        public function __destruct()
-        {
-            self::$connexion = null;
-        }
-     }   
+    }   
 ?>
