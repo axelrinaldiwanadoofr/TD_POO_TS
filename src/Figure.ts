@@ -3,11 +3,13 @@ import { Clonable } from "./FabriqueClone";
 
 export class Figure implements Clonable<Figure>
 {
+    protected id: number = 0 ;
     protected _couleur: string = "black" ;
     protected _epaisseur: number = 3 ;
 
-    constructor( couleur: string = "black", epaisseur: number = 3 )
+    constructor( id: number, couleur: string = "black", epaisseur: number = 3 )
     {
+        this.id = id ;
         this.couleur = couleur ;
         this.epaisseur = epaisseur ;
     }
@@ -50,13 +52,16 @@ export class Figure implements Clonable<Figure>
     {        
     }
 
-    public setFromData( data: Array<any> ): void
-    {        
+    public setFromData( data: Map<string,any> ): void
+    {       
+        this.id = data["id"] as number ;
+        this.couleur = data["couleur"] as string ;
+        this.epaisseur = data["epaisseur"] as number ;
     }
 
     public cloner(): Figure
     {
-        return new Figure() ;
+        return new Figure( this.id, this.couleur, this.epaisseur ) ;
     }
 
 }

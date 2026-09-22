@@ -28,30 +28,10 @@ export class VwDessin extends HTMLElement
         this.dessin = new Dessin() ;
 
         // Ajout des modèles utilisables pour le dessin
-        this.fabrique.ajouter( "point", new FgPoint( 0, 0 ) ) ;
-        this.fabrique.ajouter( "segment", new FgSegment( 0, 0, 0, 0 ) ) ;
+        Dessin.ajouterModele( "Point", new FgPoint( 0, 0, 0 ) ) ;
+        Dessin.ajouterModele( "Segment", new FgSegment( 0, 0, 0, 0, 0 ) ) ;
+        
     }
-
-    public creeFigure(): Figure | null
-    {
-        let nouvelleFigure : Figure | null = null ;
-        let choixCouleur = this.shadow?.querySelector( "#choixCouleur") as HTMLInputElement ;
-        let choixFigure = this.shadow?.querySelector( "#choixFigure") as HTMLSelectElement ;
-
-        nouvelleFigure = this.fabrique.clone( choixFigure.value ) as Figure ;
-
-        if( nouvelleFigure && this.dessin )
-        {
-            nouvelleFigure.couleur = choixCouleur.value ;
-            
-            this.dessin.ajoute( nouvelleFigure ) ;
-            return nouvelleFigure ;
-        }
-        return null ;
-    } 
-
-
-    //static observedAttributes = ["width"];
 
     attributeChangedCallback(name, oldValue, newValue)
     {
@@ -92,28 +72,29 @@ export class VwDessin extends HTMLElement
         {   
             this.canvas.addEventListener( "click", (event)=>
             {
-                if( !this.figureCourante )
-                {
-                    this.figureCourante = this.creeFigure() ;
-                }
-        
-                if( this.figureCourante && this.canvas )
-                {
-                    this.compteurDeClick++ ;
+                let choixCouleur = this.shadow?.querySelector( "#choixCouleur") as HTMLInputElement ;
+                let choixFigure = this.shadow?.querySelector( "#choixFigure") as HTMLSelectElement ;
+                let choixEpaisseur = this.shadow?.querySelector( "#choixEpaisseur") as HTMLSelectElement ;
 
-                    // On crée un point à partir des coordonnées de la souri
-                    let xm = event.clientX - this.canvas.offsetLeft ; 
-                    let ym = event.clientY - this.canvas.offsetTop ;
-        
-                    if( this.figureCourante.definirPointParPoint( xm, ym, this.compteurDeClick) )
+                if( this.dessin )
+                {
+                    if( !this.compteurDeClick )
                     {
-                        this.figureCourante = null ;
-                        this.compteurDeClick = 0 ;
+                        if( this.dessin.creerEtAjouterNouvelleFigure( choixFigure.value, choixCouleur.value, parseInt(choixEpaisseur.value) ) )
+                        {
+                            this.compteurDeClick++ ;
+                        }
+                    }
+                    if( this.compteurDeClick )
+                    {
+                        if( this.dessin.definirPointParPoint( event.offsetX, event.offsetY, this.compteurDeClick++) ) 
+                        {
+                            this.compteurDeClick = 0 ;
+                        }    
                     }
                     this.updateRendering();
                 }
             }) ;
-
         }
 
         this.updateRendering();

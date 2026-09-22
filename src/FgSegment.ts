@@ -8,9 +8,9 @@ export class FgSegment extends Figure
     protected x2: number ;
     protected y2: number ;
 
-    constructor( x1: number, y1: number, x2: number, y2: number, couleur: string="#000000", largeur: number = 3 )
+    constructor( id: number, x1: number, y1: number, x2: number, y2: number, couleur: string="#000000", largeur: number = 3 )
     {
-        super( couleur, largeur ) ;
+        super( id, couleur, largeur ) ;
 
         this.x1 = x1 ;
         this.y1 = y1 ;
@@ -47,9 +47,19 @@ export class FgSegment extends Figure
         return true ;
     }
 
+    public setFromData( data: Map<string,any> ): void
+    {
+        super.setFromData( data ) ;
+        this.x1 = data["x1"] as number ;
+        this.y1 = data["y1"] as number ;
+        this.x2 = data["x2"] as number ;
+        this.y2 = data["y2"] as number ;
+    }
+
+
     public cloner(): Figure
     {
-        return new FgSegment( this.x1, this.y1, this.x2, this.y2, this._couleur, this._epaisseur ) ;
+        return new FgSegment( this.id, this.x1, this.y1, this.x2, this.y2, this._couleur, this._epaisseur ) ;
     }
 
 }

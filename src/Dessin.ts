@@ -46,6 +46,19 @@ export class Dessin implements IDessin
         return false ;
     }
 
+    createFiguresFromData( data: Array<Map<string,any>> ): void
+    {
+        for( let i = 0; i<data.length; i++ )
+        {
+            let figure = Dessin.creerFigure( data[i]["type"] ) ;
+            if( figure ) 
+            {
+                figure.setFromData( data[i] ) ;
+                this.figures.push( figure ) ;
+            }
+        }
+    }
+
     public static ajouterModele( nomType: string, modele: Figure ): void
     {
         Dessin.modeles.set( nomType, modele ) ;

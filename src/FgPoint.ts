@@ -7,9 +7,9 @@ export class FgPoint extends Figure
     protected x: number = 0 ;
     protected y: number = 0 ;
 
-    constructor( x: number, y: number, couleur: string="#000000", epaisseur: number = 3 )
+    constructor( id: number, x: number, y: number, couleur: string="#000000", epaisseur: number = 3 )
     {
-        super( couleur, epaisseur ) ;
+        super( id, couleur, epaisseur ) ;
 
         this.x = x ;
         this.y = y ;
@@ -33,9 +33,17 @@ export class FgPoint extends Figure
         return true ;
     }
 
+    public setFromData( data: Map<string,any> ): void
+    {
+        super.setFromData( data ) ;
+        this.x = data["x1"] as number ;
+        this.y = data["y1"] as number ;
+    }
+
+
     public cloner(): Figure
     {
-        return new FgPoint( this.x, this.y, this._couleur, this._epaisseur ) ;
+        return new FgPoint( this.id, this.x, this.y, this._couleur, this._epaisseur ) ;
     }
 
 }
