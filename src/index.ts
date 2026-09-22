@@ -2,9 +2,14 @@ import { VwDessin } from "./VwDessin";
 
 customElements.define( "vw-dessin", VwDessin ) ;
 
-console.log( "time 0" ) ;
+let compteur = 0 ;
+
+console.log( "time 0: compteur: " + compteur ) ;
 
 setTimeout( ()=>
 {
-    console.log( "time 1" ) ;
+    compteur++ ;
+    console.log( "time 1 compteur: " + compteur ) ;
 }, 2000 ) ;
+
+console.log( "fin" ) ;
