@@ -17,6 +17,21 @@ let unePromise = new Promise( (resolve: any,reject: any ) =>
 {
     compteur++ ;
     console.log( "time 1: compteur: " + compteur + " value: " + value ) ;
+    
+    return new Promise( (resolve: any,reject: any ) =>
+    {
+        setTimeout( function ()
+        {
+            resolve( "R2" ) ;
+        }, 3000 ) ;
+    }) ;
 })
+.then( (value)=>
+{
+    compteur++ ;
+    console.log( "time 2: compteur: " + compteur + " value: " + value ) ;
+}) ;
+
+
 
 console.log( "fin" ) ;
