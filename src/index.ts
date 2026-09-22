@@ -15,6 +15,12 @@ setTimeout( function ()
     {
         compteur++ ;
         console.log( "time 2 compteur: " + compteur ) ;
+   
+        setTimeout( function()
+        {
+            compteur++ ;
+            console.log( "time 3 compteur: " + compteur ) ;
+        }, 4000 ) ;
     }, 3000 ) ;
 }, 2000 ) ;
 
