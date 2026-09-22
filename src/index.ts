@@ -12,7 +12,8 @@ let unePromise = new Promise( (resolve: any,reject: any ) =>
     {
         resolve( "R1" ) ;
     }, 2000 ) ;
-} ).then( (value ) =>
+})
+.then( (value ) =>
 {
     compteur++ ;
     console.log( "time 1: compteur: " + compteur + " value: " + value ) ;
