@@ -6,7 +6,7 @@ let compteur = 0 ;
 
 console.log( "time 0: compteur: " + compteur ) ;
 
-setTimeout( ()=>
+setTimeout( function ()
 {
     compteur++ ;
     console.log( "time 1 compteur: " + compteur ) ;
