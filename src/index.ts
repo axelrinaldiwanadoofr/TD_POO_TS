@@ -8,7 +8,7 @@ console.log( "time 0: compteur: " + compteur ) ;
 
 
 // Fonction asynchrone 1
-function Async2000_R1(): Promise<string>
+async function Async2000_R1(): Promise<string>
 {
     return new Promise( (resolve: any,reject: any ) =>
     {
@@ -20,7 +20,7 @@ function Async2000_R1(): Promise<string>
 }
 
 // Fonction asynchrone 2
-function Async3000_R2(): Promise<string>
+async function Async3000_R2(): Promise<string>
 {
     return new Promise( (resolve: any,reject: any ) =>
     {
@@ -32,7 +32,7 @@ function Async3000_R2(): Promise<string>
 }
 
 // Fonction asynchrone 3
-function Async4000_R3(): Promise<string>
+async function Async4000_R3(): Promise<string>
 {
     return new Promise( (resolve: any,reject: any ) =>
     {
@@ -44,24 +44,24 @@ function Async4000_R3(): Promise<string>
 }
 
 // Tratitement asynchrone complet
-Async2000_R1().then( (value)=>
+async function TraitementComplet()
 {
+    let value = await Async2000_R1() ;
+
     compteur++ ;
     console.log( "time 1: compteur: " + compteur + " value: " + value ) ;
-}).then( ()=>
-{
-    return Async3000_R2() ;
-}).then( (value)=>
-{
+
+    value = await Async3000_R2() ;
+
     compteur++ ;
     console.log( "time 2: compteur: " + compteur + " value: " + value ) ;
-}).then( ()=>
-{
-    return Async4000_R3() ;
-}).then( (value)=>
-{
+
+    value = await Async4000_R3() ;
+
     compteur++ ;
     console.log( "time 3: compteur: " + compteur + " value: " + value ) ;
-}) ;
+}
+
+TraitementComplet() ;
 
 console.log( "fin" ) ;
